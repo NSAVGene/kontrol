@@ -4844,7 +4844,281 @@ NSAV - The future of AV control is here!`;
             // Load demo state after everything is initialized
             setTimeout(loadDemoFromFile, 1000);
         });
-    </script>
 
+        /* =========================================================
+   SCHEDULER & 4 NEW PRESETS
+========================================================= */
+
+const SCHEDULED_PRESETS_START = 8;     // slots 8-11
+const SCHEDULED_PRESETS_COUNT = 4;
+const ADMIN_PASSWORD         = 'demo123'; // change to real later
+
+let scheduledPresets = []; // {slot, name, channelObj, tvIds, datetimeISO}
+let isAdminAuthenticated = false;
+
+/* ---------- 1.  REGISTER 4 NEW PRESET BUTTONS ---------- */
+function createScheduledPresetButtons() {
+  const container = document.querySelector('.flex.items-center.space-x-4');
+  for (let i = 0; i < SCHEDULED_PRESETS_COUNT; i++) {
+    const slot = SCHEDULED_PRESETS_START + i;
+    const btn = document.createElement('button');
+    btn.textContent = `S${i + 1}`;
+    btn.className = 'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-semibold';
+    btn.onclick = () => recallScheduledPreset(slot);
+    container.appendChild(btn);
+  }
+}
+
+/* ---------- 2.  OPEN SCHEDULER WITH PASSWORD GATE ---------- */
+function openScheduler() {
+  if (!adminMode) {
+    showMessage('Admin Required', 'Enable Admin Mode first.');
+    return;
+  }
+  if (!isAdminAuthenticated) {
+    document.getElementById('password-modal').classList.remove('hidden');
+    document.getElementById('admin-password-input').value = '';
+    document.getElementById('admin-password-input').focus();
+    return;
+  }
+  populateSchedulerForm();
+  document.getElementById('scheduler-panel').classList.remove('hidden');
+}
+
+function closeScheduler() {
+  document.getElementById('scheduler-panel').classList.add('hidden');
+}
+
+function closePasswordModal() {
+  document.getElementById('password-modal').classList.add('hidden');
+}
+
+function checkAdminPassword() {
+  const pw = document.getElementById('admin-password-input').value;
+  if (pw === ADMIN_PASSWORD) {
+    isAdminAuthenticated = true;
+    closePasswordModal();
+    openScheduler(); // now open the real panel
+  } else {
+    showMessage('Wrong Password', 'Please try again.');
+  }
+}
+
+/* ---------- 3.  POPULATE SCHEDULER FORM ---------- */
+function populateSchedulerForm() {
+  // channel dropdown
+  const selChan = document.getElementById('scheduler-channel');
+  selChan.innerHTML = '';
+  channels.forEach(ch => {
+    const opt = document.createElement('option');
+    opt.value = ch.objectId;
+    opt.textContent = `${ch.channelNum} ${ch.displayName}`;
+    selChan.appendChild(opt);
+  });
+
+  // TV pick grid
+  const tvGrid = document.getElementById('scheduler-tv-picks');
+  tvGrid.innerHTML = '';
+  tvs.forEach(tv => {
+    const tvBtn = document.createElement('button');
+    tvBtn.textContent = tv.id;
+    tvBtn.dataset.tvId = tv.id;
+    tvBtn.className = 'w-8 h-8 rounded bg-gray-200 dark:bg-gray-600 text-xs font-bold hover:bg-primary/30';
+    tvBtn.onclick = () => tvBtn.classList.toggle('bg-green-500');
+    tvGrid.appendChild(tvBtn);
+  });
+
+  // default date/time to now + 1 hour
+  const now = new Date();
+  now.setHours(now.getHours() + 1);
+  document.getElementById('scheduler-date').value = now.toISOString().split('T')[0];
+  document.getElementById('scheduler-time').value = now.toTimeString().slice(0, 5);
+}
+
+/* ---------- 4.  SAVE SCHEDULED PRESET ---------- */
+function saveScheduledPreset() {
+  const slot   = parseInt(document.getElementById('scheduler-slot').value);
+  const name   = document.getElementById('scheduler-name').value.trim() || `Scheduled ${slot}`;
+  const chanId = document.getElementById('scheduler-channel').value;
+  const date   = document.getElementById('scheduler-date').value;
+  const time   = document.getElementById('scheduler-time').value;
+
+  const channelObj = channels.find(c => c.objectId == chanId);
+  const tvButtons  = document.querySelectorAll('#scheduler-tv-picks button.bg-green-500');
+  const tvIds      = Array.from(tvButtons).map(b => parseInt(b.dataset.tvId));
+
+  if (!channelObj || tvIds.length === 0) {
+    showMessage('Incomplete', 'Pick a channel and at least one TV.');
+    return;
+  }
+
+  const datetimeISO = new Date(`${date}T${time}`).toISOString();
+
+  // overwrite or add
+  scheduledPresets = scheduledPresets.filter(p => p.slot !== slot);
+  scheduledPresets.push({slot, name, channelObj, tvIds, datetimeISO});
+
+  // sort by datetime
+  scheduledPresets.sort((a, b) => new Date(a.datetimeISO) - new Date(b.datetimeISO));
+
+  // persist
+  if (localStorageAvailable) {
+    try {
+      localStorage.setItem('nsav-scheduled', JSON.stringify(scheduledPresets));
+    } catch {}
+  }
+
+  closeScheduler();
+  showMessage('Scheduled', `"${name}" saved to preset ${slot}.`);
+}
+
+/* ---------- 5.  RECALL SCHEDULED PRESET ---------- */
+function recallScheduledPreset(slot) {
+  const preset = scheduledPresets.find(p => p.slot === slot);
+  if (!preset) {
+    showMessage('Empty Slot', `Scheduled preset ${slot} is empty.`);
+    return;
+  }
+
+  // apply immediately (bypasses normal presets)
+  clearAllTVs(false);
+  preset.tvIds.forEach(tvId => {
+    const tv = tvs.find(t => t.id === tvId);
+    if (tv) {
+      tv.assignedChannel = preset.channelObj;
+      tv.assignedTuner = findOrAssignTuner(preset.channelObj);
+      updateTVDisplay(tvId);
+    }
+  });
+  renderChannels();
+  updateTunerStatus();
+  showMessage('Scheduled Applied', `"${preset.name}" loaded to ${preset.tvIds.length} TVs.`);
+}
+
+/* ---------- 6.  AUTO-APPLY SCHEDULER TICK ---------- */
+setInterval(() => {
+  if (!scheduledPresets.length) return;
+  const now = new Date();
+  scheduledPresets.forEach(p => {
+    const trigger = new Date(p.datetimeISO);
+    // 60-second safety window
+    if (now >= trigger && now < new Date(trigger.getTime() + 60000)) {
+      // run only once per instance
+      if (!p.triggered) {
+        recallScheduledPreset(p.slot);
+        p.triggered = true;
+        // mark so we don't loop
+        setTimeout(() => delete p.triggered, 60000);
+      }
+    }
+  });
+}, 30000);
+
+/* ---------- 7.  LOAD SCHEDULED ON START ---------- */
+if (localStorageAvailable) {
+  try {
+    const saved = localStorage.getItem('nsav-scheduled');
+    if (saved) scheduledPresets = JSON.parse(saved);
+  } catch {}
+}
+
+/* ---------- 8.  WIRE INTO ADMIN MENU ---------- */
+function addSchedulerToAdminMenu() {
+  const adminMenu = document.getElementById('admin-menu');
+  const hr = document.createElement('hr');
+  hr.className = 'border-gray-200 dark:border-gray-600 my-1';
+  adminMenu.appendChild(hr);
+
+  const btn = document.createElement('button');
+  btn.onclick = () => openScheduler();
+  btn.className = 'w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700';
+  btn.textContent = '📅 Scheduler';
+  adminMenu.appendChild(btn);
+}
+
+/* ---------- 9.  CALL ON INIT ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  createScheduledPresetButtons();
+  addSchedulerToAdminMenu();
+});
+        
+    </script>
+<!-- ===== SCHEDULER PANEL (hidden by default) ===== -->
+<div id="scheduler-panel" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60] hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden flex flex-col">
+    <!-- header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">📅 Scheduler</h3>
+      <button onclick="closeScheduler()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+        <span class="text-xl">✕</span>
+      </button>
+    </div>
+
+    <!-- body -->
+    <div class="flex-1 overflow-y-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- calendar -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Date</label>
+        <input id="scheduler-date" type="date" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Time</label>
+        <input id="scheduler-time" type="time" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+      </div>
+
+      <!-- preset slot picker -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-1">Scheduled Preset (4-7)</label>
+        <select id="scheduler-slot" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+          <option value="8">8 – Sunday Ticket</option>
+          <option value="9">9 – Game Day</option>
+          <option value="10">10 – News Block</option>
+          <option value="11">11 – Fight Night</option>
+        </select>
+      </div>
+
+      <!-- preset name -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-1">Preset Name</label>
+        <input id="scheduler-name" type="text" placeholder="e.g. Sunday Ticket" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+      </div>
+
+      <!-- channel selector (re-use existing channel list) -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-1">Channel to schedule</label>
+        <select id="scheduler-channel" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+          <!-- filled at runtime -->
+        </select>
+      </div>
+
+      <!-- TV multiselect -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-1">Target TVs (click to toggle)</label>
+        <div id="scheduler-tv-picks" class="grid grid-cols-8 gap-1 text-xs font-semibold">
+          <!-- filled at runtime -->
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <div class="flex justify-end p-4 border-t border-gray-200 dark:border-gray-700">
+      <button onclick="saveScheduledPreset()" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+        💾 Save Scheduled Preset
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PASSWORD MODAL (first-time gate) ===== -->
+<div id="password-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[70] hidden">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-sm w-full mx-4 p-6">
+    <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Admin Password</h3>
+    <input id="admin-password-input" type="password" placeholder="demo123" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 mb-4">
+    <div class="flex justify-end space-x-3">
+      <button onclick="closePasswordModal()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Cancel</button>
+      <button onclick="checkAdminPassword()" class="px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded">Enter</button>
+    </div>
+  </div>
+</div>
 
 </body></html>
