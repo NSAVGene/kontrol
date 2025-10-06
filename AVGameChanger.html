@@ -53,16 +53,11 @@ SPECS TO CHECK EACH TIME:
             border: 6px solid #5D5CDE !important;
             transform: scale(1.1);
         }
-        .tv-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
+
         .channel-row {
             transition: all 0.2s ease;
         }
-        .channel-row:hover {
-            background: rgba(93, 92, 222, 0.05);
-        }
+
         .channel-selected {
             background: rgba(93, 92, 222, 0.1) !important;
             border-left: 4px solid #5D5CDE;
@@ -89,70 +84,70 @@ SPECS TO CHECK EACH TIME:
                 <div class="flex items-center gap-12">
                     <!-- Preset Buttons Group -->
                     <div class="flex items-center space-x-4">
-                        <button onmousedown="handlePresetMouseDown(1)" onmouseup="handlePresetMouseUp(1)" onmouseleave="handlePresetMouseUp(1)" ontouchstart="handlePresetTouchStart(1)" ontouchend="handlePresetTouchEnd(1)" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-semibold">
+                        <button onmousedown="handlePresetMouseDown(1)" onmouseup="handlePresetMouseUp(1)" onmouseleave="handlePresetMouseUp(1)" ontouchstart="handlePresetTouchStart(1)" ontouchend="handlePresetTouchEnd(1)" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors font-semibold">
                             Preset 1
                         </button>
-                        <button onmousedown="handlePresetMouseDown(2)" onmouseup="handlePresetMouseUp(2)" onmouseleave="handlePresetMouseUp(2)" ontouchstart="handlePresetTouchStart(2)" ontouchend="handlePresetTouchEnd(2)" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-semibold">
+                        <button onmousedown="handlePresetMouseDown(2)" onmouseup="handlePresetMouseUp(2)" onmouseleave="handlePresetMouseUp(2)" ontouchstart="handlePresetTouchStart(2)" ontouchend="handlePresetTouchEnd(2)" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors font-semibold">
                             Preset 2
                         </button>
-                        <button onmousedown="handlePresetMouseDown(3)" onmouseup="handlePresetMouseUp(3)" onmouseleave="handlePresetMouseUp(3)" ontouchstart="handlePresetTouchStart(3)" ontouchend="handlePresetTouchEnd(3)" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-semibold">
+                        <button onmousedown="handlePresetMouseDown(3)" onmouseup="handlePresetMouseUp(3)" onmouseleave="handlePresetMouseUp(3)" ontouchstart="handlePresetTouchStart(3)" ontouchend="handlePresetTouchEnd(3)" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors font-semibold">
                             Preset 3
                         </button>
                     </div>
                     
                     <!-- Utility Buttons Group -->
                     <div class="flex items-center space-x-4">
-                        <button onclick="showHelp()" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <button onclick="showHelp()" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors">
                             📖 Help
                         </button>
                     <div class="relative">
-                        <button onclick="toggleAdminMenu()" id="admin-toggle" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        <button onclick="toggleAdminMenu()" id="admin-toggle" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors">
                             👤 Admin
                         </button>
                         <div id="admin-menu" class="absolute right-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 z-50 hidden">
                             <div class="py-2">
-                                <button onclick="toggleAdminMode(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="toggleAdminMode(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                     <span id="admin-mode-text">Enable Admin Mode</span>
                                 </button>
                                 <hr class="border-gray-200 dark:border-gray-600 my-1">
-                                <button onclick="showTVSetup(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="showTVSetup(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                     📺 TV Setup
                                 </button>
-                                <button onclick="toggleDebugMode(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="toggleDebugMode(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                     <span id="debug-menu-text">Debug</span>
                                 </button>
-                                <button onclick="showPrefixManager(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="showPrefixManager(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                     ⚙️ Manage Prefixes
                                 </button>
                                 <hr class="border-gray-200 dark:border-gray-600 my-1">
-                                <button onclick="document.getElementById('floor-plan-upload').click(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="document.getElementById('floor-plan-upload').click(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                     📁 Load Floor Plan
                                 </button>
-                                <button onclick="toggleImageInvert(); closeAdminMenu();" id="admin-invert-btn" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="toggleImageInvert(); closeAdminMenu();" id="admin-invert-btn" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                     🔄 Invert Image
                                 </button>
-                                <button onclick="showFloorPlanControls(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="showFloorPlanControls(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                     📐 Adjust Size
                                 </button>
-                                <button onclick="resetTVPositions(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="resetTVPositions(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                     📺 Reset TV Layout
                                 </button>
                                 <hr class="border-gray-200 dark:border-gray-600 my-1">
-                                <button onclick="toggleDrawingMode(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-707 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                <button onclick="toggleDrawingMode(); closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-707 dark:text-gray-300">
                                     <span id="drawing-menu-text">🎨 Annotation Tools</span>
                                 </button>
                                 <hr class="border-gray-200 dark:border-gray-600 my-1">
-                                <a href="mailto:gene@nostaticav.com?subject=AV Game Changer Support Request" onclick="closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 block">
+                                <a href="mailto:gene@nostaticav.com?subject=AV Game Changer Support Request" onclick="closeAdminMenu();" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 block">
                                     📧 Email Support
                                 </a>
                             </div>
                         </div>
                         <input type="file" id="floor-plan-upload" accept="image/*" class="hidden" onchange="loadFloorPlan(event)">
                     </div>
-                    <button onclick="toggleColorMode()" id="color-toggle" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <button onclick="toggleColorMode()" id="color-toggle" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors">
                         🎨 Colors
                     </button>
-                    <button onclick="showMessage('Save Feature', 'Auto-save will be implemented in production version.')" id="save-button" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                    <button onclick="showMessage('Save Feature', 'Auto-save will be implemented in production version.')" id="save-button" class="px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors">
                         💾 Save
                     </button>
                     <div class="text-sm">
@@ -225,13 +220,13 @@ SPECS TO CHECK EACH TIME:
                         
                         <!-- Filter Buttons -->
                         <div class="flex flex-wrap gap-1">
-                            <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500">
+                            <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300">
                                 All
                             </button>
-                            <button onclick="setFilter('sports')" id="filter-sports" class="filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500">
+                            <button onclick="setFilter('sports')" id="filter-sports" class="filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300">
                                 Sports
                             </button>
-                            <button onclick="setFilter('news')" id="filter-news" class="filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500">
+                            <button onclick="setFilter('news')" id="filter-news" class="filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300">
                                 News
                             </button>
 
@@ -240,10 +235,10 @@ SPECS TO CHECK EACH TIME:
                         <!-- Admin Mode Controls -->
                         <div id="admin-controls" class="mt-3 hidden">
                             <div class="flex flex-wrap gap-1">
-                                <button onclick="setFilter('sd')" id="filter-sd" class="filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500">
+                                <button onclick="setFilter('sd')" id="filter-sd" class="filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300">
                                     📺 Show SD
                                 </button>
-                                <button onclick="hideAllSDChannels()" class="px-3 py-1.5 text-xs bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300 rounded-lg hover:bg-red-200 dark:hover:bg-red-800 transition-colors">
+                                <button onclick="hideAllSDChannels()" class="px-3 py-1.5 text-xs bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300 rounded-lg transition-colors">
                                     🚫 Hide All SD
                                 </button>
                             </div>
@@ -278,8 +273,8 @@ SPECS TO CHECK EACH TIME:
             <h3 id="modal-title" class="text-lg font-semibold mb-4"></h3>
             <p id="modal-message" class="text-gray-600 dark:text-gray-400 mb-4"></p>
             <div class="flex justify-end space-x-3">
-                <button onclick="closeModal()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Cancel</button>
-                <button onclick="closeModal()" class="px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded">OK</button>
+                <button onclick="closeModal()" class="px-4 py-2 text-gray-600 dark:text-gray-400 rounded">Cancel</button>
+                <button onclick="closeModal()" class="px-4 py-2 bg-primary text-white rounded">OK</button>
             </div>
         </div>
     </div>
@@ -290,7 +285,7 @@ SPECS TO CHECK EACH TIME:
             <!-- Header -->
             <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Manage Program Prefixes</h3>
-                <button onclick="closePrefixManager()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <button onclick="closePrefixManager()" class="text-gray-400">
                     <span class="text-xl">✕</span>
                 </button>
             </div>
@@ -313,7 +308,7 @@ SPECS TO CHECK EACH TIME:
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Add New Prefix</label>
                     <div class="flex space-x-2">
                         <input id="new-prefix-input" type="text" placeholder="e.g. 'NBA Basketball:' or 'College Football:'" class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm" onkeypress="handlePrefixKeyPress(event)">
-                        <button onclick="addNewPrefix()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                        <button onclick="addNewPrefix()" class="px-4 py-2 bg-primary text-white rounded-lg transition-colors text-sm font-medium">
                             + Add
                         </button>
                     </div>
@@ -330,10 +325,10 @@ SPECS TO CHECK EACH TIME:
             
             <!-- Footer -->
             <div class="flex justify-between p-6 border-t border-gray-200 dark:border-gray-700">
-                <button onclick="resetPrefixesToDefault()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm font-medium">
+                <button onclick="resetPrefixesToDefault()" class="px-4 py-2 text-gray-600 dark:text-gray-400 rounded-lg transition-colors text-sm font-medium">
                     🔄 Reset to Defaults
                 </button>
-                <button onclick="savePrefixChanges()" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                <button onclick="savePrefixChanges()" class="px-6 py-2 bg-green-600 text-white rounded-lg transition-colors text-sm font-medium">
                     💾 Save Changes
                 </button>
             </div>
@@ -346,7 +341,7 @@ SPECS TO CHECK EACH TIME:
             <!-- Header -->
             <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">📺 TV Setup Configuration</h3>
-                <button onclick="closeTVSetup()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <button onclick="closeTVSetup()" class="text-gray-400">
                     <span class="text-xl">✕</span>
                 </button>
             </div>
@@ -379,7 +374,7 @@ SPECS TO CHECK EACH TIME:
                     <div class="flex items-center space-x-4 mb-4">
                         <input id="tv-count-input" type="number" min="1" max="100" value="24" class="w-24 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-base text-center font-bold" onchange="updateTVConfiguration()">
                         <span class="text-sm text-gray-600 dark:text-gray-400">TVs (1-100 max)</span>
-                        <button onclick="applyTVCount()" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                        <button onclick="applyTVCount()" class="px-6 py-2 bg-primary text-white rounded-lg transition-colors text-sm font-medium">
                             🔧 Apply Configuration
                         </button>
                     </div>
@@ -416,10 +411,10 @@ SPECS TO CHECK EACH TIME:
             
             <!-- Footer -->
             <div class="flex justify-between p-6 border-t border-gray-200 dark:border-gray-700">
-                <button onclick="exportConfiguration()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-sm font-medium">
+                <button onclick="exportConfiguration()" class="px-4 py-2 text-gray-600 dark:text-gray-400 rounded-lg transition-colors text-sm font-medium">
                     📋 Export Config
                 </button>
-                <button onclick="saveTVConfiguration()" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium">
+                <button onclick="saveTVConfiguration()" class="px-6 py-2 bg-green-600 text-white rounded-lg transition-colors text-sm font-medium">
                     💾 Save &amp; Apply
                 </button>
             </div>
@@ -444,7 +439,7 @@ SPECS TO CHECK EACH TIME:
             <!-- Header -->
             <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">📐 Floor Plan Size Controls</h3>
-                <button onclick="closeFloorPlanControls()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <button onclick="closeFloorPlanControls()" class="text-gray-400">
                     <span class="text-xl">✕</span>
                 </button>
             </div>
@@ -455,7 +450,7 @@ SPECS TO CHECK EACH TIME:
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Image Display</label>
                     <div class="flex items-center space-x-4">
-                        <button onclick="toggleImageInvert()" id="invert-control-btn" class="px-4 py-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-sm">
+                        <button onclick="toggleImageInvert()" id="invert-control-btn" class="px-4 py-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded-lg transition-colors text-sm">
                             🔄 Toggle Invert
                         </button>
                         <span class="text-xs text-gray-500 dark:text-gray-400">Convert black/white colors</span>
@@ -489,17 +484,17 @@ SPECS TO CHECK EACH TIME:
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Quick Presets</label>
                     <div class="grid grid-cols-2 gap-2">
-                        <button onclick="setImageSize(800, 600)" class="px-3 py-2 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors">800×600</button>
-                        <button onclick="setImageSize(1000, 800)" class="px-3 py-2 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors">1000×800</button>
-                        <button onclick="setImageSize(1200, 900)" class="px-3 py-2 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors">1200×900</button>
-                        <button onclick="resetImageSize()" class="px-3 py-2 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">Reset</button>
+                        <button onclick="setImageSize(800, 600)" class="px-3 py-2 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded transition-colors">800×600</button>
+                        <button onclick="setImageSize(1000, 800)" class="px-3 py-2 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded transition-colors">1000×800</button>
+                        <button onclick="setImageSize(1200, 900)" class="px-3 py-2 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded transition-colors">1200×900</button>
+                        <button onclick="resetImageSize()" class="px-3 py-2 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors">Reset</button>
                     </div>
                 </div>
             </div>
             
             <!-- Footer -->
             <div class="flex justify-end p-6 border-t border-gray-200 dark:border-gray-700">
-                <button onclick="closeFloorPlanControls()" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                <button onclick="closeFloorPlanControls()" class="px-6 py-2 bg-primary text-white rounded-lg transition-colors text-sm font-medium">
                     Done
                 </button>
             </div>
@@ -512,7 +507,7 @@ SPECS TO CHECK EACH TIME:
             <!-- Header -->
             <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">🎨 Annotation Tools</h3>
-                <button onclick="closeDrawingTools()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <button onclick="closeDrawingTools()" class="text-gray-400">
                     <span class="text-xl">✕</span>
                 </button>
             </div>
@@ -526,7 +521,7 @@ SPECS TO CHECK EACH TIME:
                         <!-- Text Input -->
                         <div class="flex space-x-2">
                             <input id="text-input" type="text" placeholder="Enter text..." class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm" onkeypress="handleQuickTextKeyPress(event)" maxlength="50">
-                            <button onclick="insertQuickTextLabel()" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                            <button onclick="insertQuickTextLabel()" class="px-4 py-2 bg-primary text-white rounded-lg transition-colors text-sm font-medium">
                                 Add
                             </button>
                         </div>
@@ -548,15 +543,15 @@ SPECS TO CHECK EACH TIME:
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Drawing Tool</label>
                     <div class="grid grid-cols-3 gap-2">
-                        <button onclick="selectDrawingTool('line')" id="tool-line" class="drawing-tool-btn p-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-center">
+                        <button onclick="selectDrawingTool('line')" id="tool-line" class="drawing-tool-btn p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-center">
                             <div class="text-2xl mb-1">📏</div>
                             <div class="text-xs">Line</div>
                         </button>
-                        <button onclick="selectDrawingTool('rectangle')" id="tool-rectangle" class="drawing-tool-btn p-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-center">
+                        <button onclick="selectDrawingTool('rectangle')" id="tool-rectangle" class="drawing-tool-btn p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-center">
                             <div class="text-2xl mb-1">⬜</div>
                             <div class="text-xs">Rectangle</div>
                         </button>
-                        <button onclick="selectDrawingTool('circle')" id="tool-circle" class="drawing-tool-btn p-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-center">
+                        <button onclick="selectDrawingTool('circle')" id="tool-circle" class="drawing-tool-btn p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-center">
                             <div class="text-2xl mb-1">⭕</div>
                             <div class="text-xs">Circle</div>
                         </button>
@@ -602,8 +597,8 @@ SPECS TO CHECK EACH TIME:
                 
                 <!-- Action Buttons -->
                 <div class="flex justify-between">
-                    <button onclick="clearAllAnnotations()" class="px-3 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors text-sm">🗑️ Clear All</button>
-                    <button onclick="closeDrawingTools()" class="px-4 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors text-sm">✕ Close Tools</button>
+                    <button onclick="clearAllAnnotations()" class="px-3 py-2 text-red-600 dark:text-red-400 rounded transition-colors text-sm">🗑️ Clear All</button>
+                    <button onclick="closeDrawingTools()" class="px-4 py-2 bg-primary text-white rounded transition-colors text-sm">✕ Close Tools</button>
                 </div>
             </div>
         </div>
@@ -615,7 +610,7 @@ SPECS TO CHECK EACH TIME:
             <!-- Header -->
             <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">📝 Insert Text Label</h3>
-                <button onclick="closeTextInsertion()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <button onclick="closeTextInsertion()" class="text-gray-400">
                     <span class="text-xl">✕</span>
                 </button>
             </div>
@@ -658,8 +653,8 @@ SPECS TO CHECK EACH TIME:
             
             <!-- Footer -->
             <div class="flex justify-end space-x-3 p-6 border-t border-gray-200 dark:border-gray-700">
-                <button onclick="closeTextInsertion()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">Cancel</button>
-                <button onclick="insertTextLabel()" class="px-6 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors">Insert Text</button>
+                <button onclick="closeTextInsertion()" class="px-4 py-2 text-gray-600 dark:text-gray-400 rounded transition-colors">Cancel</button>
+                <button onclick="insertTextLabel()" class="px-6 py-2 bg-primary text-white rounded transition-colors">Insert Text</button>
             </div>
         </div>
     </div>
@@ -673,7 +668,7 @@ SPECS TO CHECK EACH TIME:
                     <h2 class="text-2xl font-bold">🎉 Welcome to AV Game Changer</h2>
                     <p class="text-blue-100">Professional Edition - Let's show you around!</p>
                 </div>
-                <button onclick="skipTour()" class="text-blue-200 hover:text-white transition-colors">
+                <button onclick="skipTour()" class="text-blue-200 transition-colors">
                     <span class="text-xl">✕</span>
                 </button>
             </div>
@@ -699,9 +694,9 @@ SPECS TO CHECK EACH TIME:
                     </div>
                 </div>
                 <div class="flex space-x-3">
-                    <button onclick="previousTourStep()" id="tour-prev-btn" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded disabled:opacity-50" disabled="">Previous</button>
-                    <button onclick="nextTourStep()" id="tour-next-btn" class="px-6 py-2 bg-primary text-white rounded hover:bg-primary/90 transition-colors">Next</button>
-                    <button onclick="skipTour()" id="tour-finish-btn" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors hidden">Start Using AV Game Changer!</button>
+                    <button onclick="previousTourStep()" id="tour-prev-btn" class="px-4 py-2 text-gray-600 dark:text-gray-400 rounded disabled:opacity-50" disabled="">Previous</button>
+                    <button onclick="nextTourStep()" id="tour-next-btn" class="px-6 py-2 bg-primary text-white rounded transition-colors">Next</button>
+                    <button onclick="skipTour()" id="tour-finish-btn" class="px-6 py-2 bg-green-600 text-white rounded transition-colors hidden">Start Using AV Game Changer!</button>
                 </div>
             </div>
         </div>
@@ -719,8 +714,8 @@ SPECS TO CHECK EACH TIME:
             <h3 id="preset-modal-title" class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Recall Preset 1?</h3>
             <p class="text-gray-600 dark:text-gray-400 mb-4">This will apply the saved TV channel assignments from this preset.</p>
             <div class="flex justify-end space-x-3">
-                <button onclick="cancelPresetRecall()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">No</button>
-                <button onclick="confirmPresetRecall()" class="px-4 py-2 bg-primary text-white hover:bg-primary/90 rounded">Yes</button>
+                <button onclick="cancelPresetRecall()" class="px-4 py-2 text-gray-600 dark:text-gray-400 rounded">No</button>
+                <button onclick="confirmPresetRecall()" class="px-4 py-2 bg-primary text-white rounded">Yes</button>
             </div>
         </div>
     </div>
@@ -731,7 +726,7 @@ SPECS TO CHECK EACH TIME:
             <!-- Header -->
             <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100">📖 AV Game Changer - Help &amp; Operations</h3>
-                <button onclick="closeHelp()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                <button onclick="closeHelp()" class="text-gray-400">
                     <span class="text-xl">✕</span>
                 </button>
             </div>
@@ -742,7 +737,7 @@ SPECS TO CHECK EACH TIME:
                 <div class="mb-6">
                     <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">🎯 Quick Actions</h4>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <button onclick="applyPreset('gamenight'); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/30 transition-colors text-left">
+                        <button onclick="applyPreset('gamenight'); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors text-left">
                             <div class="flex items-center space-x-3">
                                 <span class="text-2xl">🏈</span>
                                 <div>
@@ -752,7 +747,7 @@ SPECS TO CHECK EACH TIME:
                             </div>
                         </button>
                         
-                        <button onclick="saveSystemState(true); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/30 transition-colors text-left">
+                        <button onclick="saveSystemState(true); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors text-left">
                             <div class="flex items-center space-x-3">
                                 <span class="text-2xl">💾</span>
                                 <div>
@@ -762,7 +757,7 @@ SPECS TO CHECK EACH TIME:
                             </div>
                         </button>
                         
-                        <button onclick="startOnboardingTour(); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/30 transition-colors text-left">
+                        <button onclick="startOnboardingTour(); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors text-left">
                             <div class="flex items-center space-x-3">
                                 <span class="text-2xl">🎓</span>
                                 <div>
@@ -772,7 +767,7 @@ SPECS TO CHECK EACH TIME:
                             </div>
                         </button>
                         
-                        <button onclick="openSupportBot(); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/30 transition-colors text-left">
+                        <button onclick="openSupportBot(); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors text-left">
                             <div class="flex items-center space-x-3">
                                 <span class="text-2xl">🎧</span>
                                 <div>
@@ -782,7 +777,7 @@ SPECS TO CHECK EACH TIME:
                             </div>
                         </button>
                         
-                        <button onclick="exportDemoPackage(); closeHelp();" class="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-800/30 transition-colors text-left">
+                        <button onclick="exportDemoPackage(); closeHelp();" class="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-lg transition-colors text-left">
                             <div class="flex items-center space-x-3">
                                 <span class="text-2xl">📦</span>
                                 <div>
@@ -792,7 +787,7 @@ SPECS TO CHECK EACH TIME:
                             </div>
                         </button>
                         
-                        <button onclick="showConfirmClearAll(); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800/30 transition-colors text-left">
+                        <button onclick="showConfirmClearAll(); closeHelp();" class="p-4 bg-gray-50 dark:bg-gray-900/20 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors text-left">
                             <div class="flex items-center space-x-3">
                                 <span class="text-2xl">🗑️</span>
                                 <div>
@@ -984,7 +979,7 @@ SPECS TO CHECK EACH TIME:
             
             <!-- Footer -->
             <div class="flex justify-end p-6 border-t border-gray-200 dark:border-gray-700">
-                <button onclick="closeHelp()" class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium">
+                <button onclick="closeHelp()" class="px-6 py-2 bg-primary text-white rounded-lg transition-colors text-sm font-medium">
                     Got it! 👍
                 </button>
             </div>
@@ -1194,7 +1189,7 @@ SPECS TO CHECK EACH TIME:
                 tvs.push(tv);
                 
                 const tvElement = document.createElement('div');
-                tvElement.className = 'tv-box bg-gray-100 dark:bg-gray-700 rounded-lg p-2 text-center cursor-move hover:bg-gray-200 dark:hover:bg-gray-600 border-2 border-transparent w-28 h-24 flex flex-col absolute user-select-none pointer-events-auto';
+                tvElement.className = 'tv-box bg-gray-100 dark:bg-gray-700 rounded-lg p-2 text-center cursor-move border-2 border-transparent w-28 h-24 flex flex-col absolute user-select-none pointer-events-auto';
                 tvElement.id = `tv-${i}`;
                 
                 // Set initial position
@@ -1472,7 +1467,7 @@ SPECS TO CHECK EACH TIME:
 
             filteredChannels.forEach(channel => {
                 const channelElement = document.createElement('div');
-                channelElement.className = `channel-row p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${selectedChannel?.objectId === channel.objectId ? 'channel-selected' : ''}`;
+                channelElement.className = `channel-row p-3 cursor-pointer transition-colors ${selectedChannel?.objectId === channel.objectId ? 'channel-selected' : ''}`;
                 channelElement.onclick = (event) => {
                     // Check if color mode is active first
                     if (colorMode && handleChannelColorClick(channel)) {
@@ -1509,8 +1504,8 @@ SPECS TO CHECK EACH TIME:
                 const isHidden = hiddenChannels.has(channel.objectId);
                 const adminButton = adminMode ? 
                     (isHidden ? 
-                        `<button onclick="showChannel(${channel.objectId}); event.stopPropagation();" class="px-2 py-1 text-xs bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 rounded hover:bg-green-200 dark:hover:bg-green-800 transition-colors">👁️ Show</button>` :
-                        `<button onclick="hideChannel(${channel.objectId}); event.stopPropagation();" class="px-2 py-1 text-xs bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300 rounded hover:bg-red-200 dark:hover:bg-red-800 transition-colors">🚫 Hide</button>`
+                        `<button onclick="showChannel(${channel.objectId}); event.stopPropagation();" class="px-2 py-1 text-xs bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 rounded transition-colors">👁️ Show</button>` :
+                        `<button onclick="hideChannel(${channel.objectId}); event.stopPropagation();" class="px-2 py-1 text-xs bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300 rounded transition-colors">🚫 Hide</button>`
                     ) : '';
                 
                 channelElement.innerHTML = `
@@ -1899,13 +1894,13 @@ SPECS TO CHECK EACH TIME:
 
             if (isActive) {
                 // Teal: Currently active/recalled preset
-                button.className = 'px-3 py-1 text-xs bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300 rounded hover:bg-teal-200 dark:hover:bg-teal-800 transition-colors font-semibold';
+                button.className = 'px-3 py-1 text-xs bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300 rounded transition-colors font-semibold';
             } else if (hasContent) {
                 // Blue: Has stored preset but not currently active
-                button.className = 'px-3 py-1 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors font-semibold';
+                button.className = 'px-3 py-1 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded transition-colors font-semibold';
             } else {
                 // Grey: Empty preset slot
-                button.className = 'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-semibold';
+                button.className = 'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors font-semibold';
             }
         }
 
@@ -1961,7 +1956,7 @@ SPECS TO CHECK EACH TIME:
                 channelDisplay.className = 'flex flex-col h-full';
             } else {
                 tvElement.classList.remove('tv-assigned', 'tv-highlighted', 'tv-selected-for-copy');
-                tvElement.className = 'tv-box bg-gray-100 dark:bg-gray-700 rounded-lg p-2 text-center cursor-move hover:bg-gray-200 dark:hover:bg-gray-600 border-2 border-transparent w-28 h-24 flex flex-col absolute user-select-none pointer-events-auto';
+                tvElement.className = 'tv-box bg-gray-100 dark:bg-gray-700 rounded-lg p-2 text-center cursor-move border-2 border-transparent w-28 h-24 flex flex-col absolute user-select-none pointer-events-auto';
                 
                 // Hide channel number when no assignment
                 channelNumSpan.classList.add('hidden');
@@ -1999,8 +1994,8 @@ SPECS TO CHECK EACH TIME:
             const toggleButton = document.getElementById('debug-toggle');
             toggleButton.textContent = 'Debug';
             toggleButton.className = debugMode ? 
-                'px-3 py-1 text-xs bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400 rounded hover:bg-green-200 dark:hover:bg-green-800 transition-colors' :
-                'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors';
+                'px-3 py-1 text-xs bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400 rounded transition-colors' :
+                'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors';
             
             // Update all TV displays to show/hide IP addresses
             tvs.forEach(tv => {
@@ -2026,7 +2021,7 @@ SPECS TO CHECK EACH TIME:
             currentFilter = filter;
             
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500';
+                btn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300
             });
             
             const filterButton = document.getElementById(`filter-${filter}`);
@@ -2308,7 +2303,7 @@ SPECS TO CHECK EACH TIME:
                     <span class="text-sm font-medium text-gray-900 dark:text-gray-100">"${prefix}"</span>
                     <button 
                         onclick="removePrefix(${index})" 
-                        class="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1"
+                        class="text-red-600 dark:text-red-400 p-1"
                         title="Remove prefix"
                     >
                         🗑️
@@ -2387,13 +2382,13 @@ SPECS TO CHECK EACH TIME:
             // Update button styling to show admin mode is active
             if (adminMode) {
                 adminControls.classList.remove('hidden');
-                adminToggle.className = 'px-3 py-1 text-xs bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400 rounded hover:bg-green-200 dark:hover:bg-green-800 transition-colors';
+                adminToggle.className = 'px-3 py-1 text-xs bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400 rounded transition-colors';
                 adminToggle.innerHTML = '👤 Admin ON';
                 updateStatusMessage('Admin Mode Active', true, 'clean');
                 // No confirmation popup - streamlined workflow
             } else {
                 adminControls.classList.add('hidden');
-                adminToggle.className = 'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors';
+                adminToggle.className = 'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors';
                 adminToggle.innerHTML = '👤 Admin';
                 updateStatusMessage('', false);
             }
@@ -2430,8 +2425,8 @@ SPECS TO CHECK EACH TIME:
             
             toggleButton.textContent = colorMode ? '🎨 Colors ON' : '🎨 Colors';
             toggleButton.className = colorMode ? 
-                'px-3 py-1 text-xs bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400 rounded hover:bg-green-200 dark:hover:bg-green-800 transition-colors' :
-                'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors';
+                'px-3 py-1 text-xs bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400 rounded transition-colors' :
+                'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors';
             
             if (colorMode) {
                 // Open color picker immediately and keep it open
@@ -2478,7 +2473,7 @@ SPECS TO CHECK EACH TIME:
                 const isAssigned = assignedColors.has(color.name);
                 const isSelected = selectedColorForAssignment === color.name;
                 
-                colorButton.className = `w-12 h-12 rounded-lg cursor-pointer border-2 transition-all hover:scale-110 flex items-center justify-center ${
+                colorButton.className = `w-12 h-12 rounded-lg cursor-pointer border-2 transition-all flex items-center justify-center ${
                     isSelected ? 'border-gray-800 dark:border-gray-200 ring-4 ring-offset-2 ring-primary' : 'border-gray-300 dark:border-gray-600'
                 }`;
                 colorButton.style.backgroundColor = color.value;
@@ -2698,7 +2693,7 @@ SPECS TO CHECK EACH TIME:
                 const footballBtn = document.createElement('button');
                 footballBtn.onclick = () => setFilter('football');
                 footballBtn.id = 'filter-football';
-                footballBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500';
+                footballBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300
                 footballBtn.textContent = '🏈 Football';
                 lastSportBtn.parentNode.insertBefore(footballBtn, lastSportBtn.nextSibling);
                 lastSportBtn = footballBtn;
@@ -2708,7 +2703,7 @@ SPECS TO CHECK EACH TIME:
                 const basketballBtn = document.createElement('button');
                 basketballBtn.onclick = () => setFilter('basketball');
                 basketballBtn.id = 'filter-basketball';
-                basketballBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500';
+                basketballBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300
                 basketballBtn.textContent = '🏀 Basketball';
                 lastSportBtn.parentNode.insertBefore(basketballBtn, lastSportBtn.nextSibling);
                 lastSportBtn = basketballBtn;
@@ -2718,7 +2713,7 @@ SPECS TO CHECK EACH TIME:
                 const baseballBtn = document.createElement('button');
                 baseballBtn.onclick = () => setFilter('baseball');
                 baseballBtn.id = 'filter-baseball';
-                baseballBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500';
+                baseballBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300
                 baseballBtn.textContent = '⚾ Baseball';
                 lastSportBtn.parentNode.insertBefore(baseballBtn, lastSportBtn.nextSibling);
                 lastSportBtn = baseballBtn;
@@ -2728,7 +2723,7 @@ SPECS TO CHECK EACH TIME:
                 const soccerBtn = document.createElement('button');
                 soccerBtn.onclick = () => setFilter('soccer');
                 soccerBtn.id = 'filter-soccer';
-                soccerBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500';
+                soccerBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300
                 soccerBtn.textContent = '⚽ Soccer';
                 lastSportBtn.parentNode.insertBefore(soccerBtn, lastSportBtn.nextSibling);
                 lastSportBtn = soccerBtn;
@@ -2738,7 +2733,7 @@ SPECS TO CHECK EACH TIME:
                 const hockeyBtn = document.createElement('button');
                 hockeyBtn.onclick = () => setFilter('hockey');
                 hockeyBtn.id = 'filter-hockey';
-                hockeyBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500';
+                hockeyBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300
                 hockeyBtn.textContent = '🏒 Hockey';
                 lastSportBtn.parentNode.insertBefore(hockeyBtn, lastSportBtn.nextSibling);
                 lastSportBtn = hockeyBtn;
@@ -2748,7 +2743,7 @@ SPECS TO CHECK EACH TIME:
                 const mmaBtn = document.createElement('button');
                 mmaBtn.onclick = () => setFilter('mma');
                 mmaBtn.id = 'filter-mma';
-                mmaBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-500';
+                mmaBtn.className = 'filter-btn px-3 py-1.5 text-xs font-medium rounded-lg transition-colors bg-gray-100 text-gray-700 dark:bg-gray-600 dark:text-gray-300
                 mmaBtn.textContent = '🥊 MMA';
                 lastSportBtn.parentNode.insertBefore(mmaBtn, lastSportBtn.nextSibling);
                 lastSportBtn = mmaBtn;
@@ -4053,10 +4048,10 @@ NSAV - The future of AV control is here!`;
             if (button) {
                 if (hasContent) {
                     // Button has stored content - make it more prominent
-                    button.className = 'px-3 py-1 text-xs bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 rounded hover:bg-green-200 dark:hover:bg-green-800 transition-colors font-semibold';
+                    button.className = 'px-3 py-1 text-xs bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 rounded transition-colors font-semibold';
                 } else {
                     // Button is empty - default grey appearance
-                    button.className = 'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-semibold';
+                    button.className = 'px-3 py-1 text-xs bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 rounded transition-colors font-semibold';
                 }
             }
         }
@@ -4091,8 +4086,8 @@ NSAV - The future of AV control is here!`;
                     <h3 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Clear All TV Assignments?</h3>
                     <p class="text-gray-600 dark:text-gray-400 mb-4">This will clear all channel assignments from all TVs and reset them to available status. This action cannot be undone.</p>
                     <div class="flex justify-end space-x-3">
-                        <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">Cancel</button>
-                        <button onclick="this.closest('.fixed').remove(); clearAllTVs(true);" class="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded">Clear All</button>
+                        <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 text-gray-600 dark:text-gray-400 rounded">Cancel</button>
+                        <button onclick="this.closest('.fixed').remove(); clearAllTVs(true);" class="px-4 py-2 bg-red-500 text-white rounded">Clear All</button>
                     </div>
                 </div>
             `;
@@ -4142,7 +4137,7 @@ NSAV - The future of AV control is here!`;
             
             // Update button styles
             document.querySelectorAll('.drawing-tool-btn').forEach(btn => {
-                btn.className = 'drawing-tool-btn p-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 text-center';
+                btn.className = 'drawing-tool-btn p-3 border border-gray-300 dark:border-gray-600 rounded-lg text-center';
             });
             
             const selectedBtn = document.getElementById(`tool-${tool}`);
